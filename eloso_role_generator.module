@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @file
+ * Contains eloso_role_generator.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function eloso_role_generator_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the eloso_role_generator module.
+    case 'help.page.eloso_role_generator':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Generate roles on install') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_install().
+ */
+function eloso_role_generator_install($is_syncing) {
+
+
+  $roles['roles'] = [
+    ['id' => 'number_plate_administrator', 'label' => 'Number Plate Administrator' ],
+    ['id' => 'pna_site_administrator', 'label' => 'Site Administrator' ],
+  ];
+
+  foreach ($roles['roles'] as $role) {
+
+    // creating your role
+    $role = \Drupal\user\Entity\Role::create($role);
+
+    //saving your role
+    $role->save();
+  }
+
+}

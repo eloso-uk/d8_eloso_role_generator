@@ -1,0 +1,5 @@
+name: 'Eloso Role Generator'
+type: module
+description: 'Generate roles on install'
+core: 8.x
+package: 'Eloso'
